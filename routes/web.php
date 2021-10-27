@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,3 +28,13 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum','verified']) ->get('/subjectlist',[PostController::class,'subjectlist'])->name('subjectlist');
+Route::middleware(['auth:sanctum','verified']) ->get('/subjectpost',[PostController::class,'subjectpost'])->name('subjectpost');
+Route::middleware(['auth:sanctum','verified']) ->get('/subjectuser',[PostController::class,'subjectuser'])->name('subjectuser');
+Route::post('/post/subject',[PostController::class,'PostSubject']);
+Route::post('/show/subject',[PostController::class,'ShowSubject']);
+Route::post('/update/subject',[PostController::class,'UpdateSubject']);
+Route::post('/delete/subject',[PostController::class,'DeleteSubject']);
+Route::post('/check/subject/{subject_id}',[PostController::class,'CheckSubject']);
+Route::post('/show/user',[PostController::class,'ShowUser']);
